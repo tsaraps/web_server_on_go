@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  go_server:
+    build: .
+    restart: always
+    ports:
+    - "3000:3000"
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: example
+    volumes: 
+      - db:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+volumes:
+  db:
+    driver: local
